@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda del Barrio</title>
+
+ 
+  <style>
+    :root{
+      --primary:#2e86c1;
+      --primary-dark:#1f5f8a;
+      --bg:#f4f6fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --shadow: 0 10px 25px rgba(0,0,0,.08);
+      --radius: 16px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+  
+    header{
+      background: linear-gradient(135deg, var(--primary), #4aa3e0);
+      color: white;
+      padding: 28px 16px;
+    }
+
+    .container{
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    .header-wrap{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    header h1{
+      margin: 0;
+      font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+      letter-spacing: .2px;
+    }
+    header p{
+      margin: 6px 0 0;
+      opacity: .95;
+      max-width: 60ch;
+    }
+
+ 
+    nav{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    nav a{
+      color: white;
+      text-decoration: none;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      font-size: .95rem;
+      transition: .2s ease;
+    }
+    nav a:hover{
+      background: rgba(255,255,255,.15);
+    }
+
+ 
+    main{
+      padding: 22px 0 30px;
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: 1.6fr .9fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+
+    section{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    section h2{
+      margin: 0 0 12px;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    .muted{ color: var(--muted); }
+
+  
+    .product-list{
+      margin: 0;
+      padding-left: 18px;
+    }
+    .product-list li{
+      padding: 6px 0;
+    }
+
+ 
+    .products-grid{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .product-card{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .product-card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(0,0,0,.10);
+    }
+
+    .product-img{
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+      background: #eef2f7;
+    }
+
+    .product-body{
+      padding: 10px 12px 12px;
+    }
+    .product-title{
+      margin: 0 0 6px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .price{
+      display: inline-block;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: rgba(46,134,193,.12);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: .95rem;
+    }
+
+ 
+    form{
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .field{
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label{
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    input, select, textarea{
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      font-size: 1rem;
+      background: #fff;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(46,134,193,.7);
+      box-shadow: 0 0 0 4px rgba(46,134,193,.14);
+    }
+
+    .row{
+      display: flex;
+      gap: 12px;
+    }
+    .row .field{
+      flex: 1;
+    }
+
+    .btn{
+      cursor: pointer;
+      border: none;
+      background: var(--primary);
+      color: white;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: .2s ease;
+    }
+    .btn:hover{
+      background: var(--primary-dark);
+    }
+
+    .note{
+      font-size: .92rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+   
+    .info-box{
+      display: grid;
+      gap: 12px;
+    }
+    .badge{
+      display: inline-block;
+      background: rgba(46,134,193,.12);
+      color: var(--primary-dark);
+      border: 1px solid rgba(46,134,193,.22);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .92rem;
+    }
+
+  
+    footer{
+      background-color: #111827;
+      color: white;
+      padding: 18px 0;
+      margin-top: 16px;
+    }
+    footer p{
+      margin: 4px 0;
+      text-align: center;
+      opacity: .92;
+    }
+
+
+    @media (max-width: 900px){
+      .grid{
+        grid-template-columns: 1fr;
+      }
+      .products-grid{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px){
+      nav a{
+        padding: 9px 10px;
+      }
+      .products-grid{
+        grid-template-columns: 1fr;
+      }
+      .row{
+        flex-direction: column;
+      }
+      .product-img{
+        height: 170px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container header-wrap">
+      <div>
+        <h1>Tienda del Barrio "Don Pepe"</h1>
+        <p>Bienvenido a nuestra pequeña tienda donde encontrarás productos básicos al mejor precio.</p>
+      </div>
+
+      <nav>
+        <a href="#productos">Productos</a>
+        <a href="#galeria">Galería</a>
+        <a href="#horario">Horario</a>
+        <a href="#clientes">Formulario</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+
+ 
+      <div class="content">
+
+        <section id="productos">
+          <h2>Lista de productos</h2>
+          <ul class="product-list">
+            <li>Arroz 1kg - 8 Bs</li>
+            <li>Azúcar 1kg - 7 Bs</li>
+            <li>Leche 1 litro - 6 Bs</li>
+            <li>Pan (6 unidades) - 5 Bs</li>
+            <li>Refresco 2 litros - 10 Bs</li>
+          </ul>
+
+          <p class="note">Tip: abajo tienes una galería con imágenes. Solo cambia los <b>src</b> para poner tus fotos.</p>
+        </section>
+
+        <section id="galeria">
+          <h2>Galería de productos (con fotos)</h2>
+          <p class="muted">Cambia las rutas de las imágenes. Ejemplo: <b>img/arroz.jpg</b></p>
+
+          <div class="products-grid">
+        
+            <article class="product-card">
+           
+              <img class="product-img" src="img/arroz.jpg" alt="Arroz 1kg">
+              <div class="product-body">
+                <p class="product-title">Arroz 1kg</p>
+                <span class="price">8 Bs</span>
+              </div>
+            </article>
+
+      
+            <article class="product-card">
+              <img class="product-img" src="img/azucar.jpg" alt="Azúcar 1kg">
+              <div class="product-body">
+                <p class="product-title">Azúcar 1kg</p>
+                <span class="price">7 Bs</span>
+              </div>
+            </article>
+
+ 
+            <article class="product-card">
+              <img class="product-img" src="img/leche.jpg" alt="Leche 1 litro">
+              <div class="product-body">
+                <p class="product-title">Leche 1 litro</p>
+                <span class="price">6 Bs</span>
+              </div>
+            </article>
+
+
+            <article class="product-card">
+              <img class="product-img" src="img/pan.jpg" alt="Pan (6 unidades)">
+              <div class="product-body">
+                <p class="product-title">Pan (6 unidades)</p>
+                <span class="price">5 Bs</span>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <img class="product-img" src="img/refresco.jpg" alt="Refresco 2 litros">
+              <div class="product-body">
+                <p class="product-title">Refresco 2 litros</p>
+                <span class="price">10 Bs</span>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <img class="product-img" src="img/producto-extra.jpg" alt="Producto extra">
+              <div class="product-body">
+                <p class="product-title">Producto extra</p>
+                <span class="price">15 Bs</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="clientes">
+          <h2>Formulario para clientes</h2>
+          <p class="muted">Este formulario te sirve para tu investigación (UX) y para encuestas.</p>
+
+          <form action="#" method="post">
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="edad">Edad</label>
+                <input type="number" id="edad" name="edad" min="1" max="120" placeholder="Ej: 20" required>
+              </div>
+
+              <div class="field">
+                <label for="frecuencia">¿Cuántas veces recurre a la tienda?</label>
+                <select id="frecuencia" name="frecuencia" required>
+                  <option value="" selected disabled>Seleccione una opción</option>
+                  <option value="1-2">1 a 2 veces por semana</option>
+                  <option value="3-4">3 a 4 veces por semana</option>
+                  <option value="5-6">5 a 6 veces por semana</option>
+                  <option value="diario">Todos los días</option>
+                  <option value="ocasional">Ocasionalmente</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="comentario">Comentario (opcional)</label>
+              <textarea id="comentario" name="comentario" rows="3" placeholder="¿Qué mejorarías de la tienda o del sitio web?"></textarea>
+            </div>
+
+            <button class="btn" type="submit">Enviar</button>
+          </form>
+        </section>
+
+      </div>
+
+  
+      <aside class="info-box">
+
+        <section id="horario">
+          <h2>Horario de atención</h2>
+          <p><span class="badge">Lunes a Sábado</span><br>7:00 AM - 9:00 PM</p>
+          <p><span class="badge">Domingo</span><br>8:00 AM - 1:00 PM</p>
+        </section>
+
+        <section>
+          <h2>Contacto rápido</h2>
+          <p class="muted">Dirección: Barrio Central, Santa Cruz - Bolivia</p>
+          <p class="muted">Teléfono: 69160741</p>
+        </section>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Dirección: Barrio Central, Santa Cruz - Bolivia</p>
+      <p>Teléfono: 69160741</p>
+      <p>&copy; 2026 Tienda Don Pepe</p>
+    </div>
+  </footer>
+
+</body>
+</html>
